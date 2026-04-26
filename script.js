@@ -48,4 +48,25 @@
   toggle.addEventListener("change", () => {
     document.body.classList.toggle("dark");
   });
-  
+// OPEN MODAL
+function openModal(src) {
+  const modal = document.getElementById("imgModal");
+  const modalImg = document.getElementById("modalImg");
+
+  modal.classList.add("show");
+  modalImg.src = src;
+}
+
+// CLOSE MODAL
+function closeModal() {
+  const modal = document.getElementById("imgModal");
+  modal.classList.remove("show");
+}
+
+// CLICK OUTSIDE TO CLOSE
+window.onclick = function(e) {
+  const modal = document.getElementById("imgModal");
+  if (e.target === modal) {
+    modal.classList.remove("show");
+  }
+}
