@@ -17,37 +17,48 @@
       nav.style.setProperty("--ny", (e.clientY - rect.top) + "px");
     });
 
-    //  TYPEWRITER
-    const text = "Final year B.Tech student passionate about web development";
-    const element = document.querySelector(".typewriter");
+// TYPEWRITER WITH MULTIPLE SENTENCES
+const sentences = [
+  "Final year B.Tech student passionate about Data Science",
+  "Full Stack Developer & AI Enthusiast",
+  "Expert in Data Visualization with Tableau & Power BI",
+  "Building Intelligent Systems with Machine Learning"
+];
 
-    let index = 0;
-    let isDeleting = false;
+const element = document.querySelector(".typewriter");
 
-    function typeEffect() {
-      if (!isDeleting) {
-        element.textContent = text.substring(0, index++);
-        if (index > text.length) {
-          isDeleting = true;
-          setTimeout(typeEffect, 1500);
-          return;
-        }
-      } else {
-        element.textContent = text.substring(0, index--);
-        if (index === 0) {
-          isDeleting = false;
-        }
-      }
+let sentenceIndex = 0; 
+let charIndex = 0;     
+let isDeleting = false;
 
-      setTimeout(typeEffect, isDeleting ? 40 : 80);
+function typeEffect() {
+  const currentSentence = sentences[sentenceIndex];
+
+  if (!isDeleting) {
+    // Typing logic
+    element.textContent = currentSentence.substring(0, charIndex++);
+    if (charIndex > currentSentence.length) {
+      isDeleting = true;
+      setTimeout(typeEffect, 1500); 
+      return;
     }
+  } else {
+    
+    element.textContent = currentSentence.substring(0, charIndex--);
+    if (charIndex === 0) {
+      isDeleting = false;
+    
+      sentenceIndex = (sentenceIndex + 1) % sentences.length;
+    }
+  }
 
-    typeEffect();
-  const toggle = document.getElementById("themeToggle");
+  // Type hone ki speed (80ms) aur delete hone ki speed (40ms)
+  setTimeout(typeEffect, isDeleting ? 40 : 80);
+}
 
-  toggle.addEventListener("change", () => {
-    document.body.classList.toggle("dark");
-  });
+typeEffect();
+
+
 // OPEN MODAL
 function openModal(src) {
   const modal = document.getElementById("imgModal");
