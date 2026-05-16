@@ -1,23 +1,38 @@
+// ==========================================
+// 🌙 THEME TOGGLE (DARK / LIGHT MODE)
+// ==========================================
+const themeToggle = document.getElementById("themeToggle");
 
-    function toggleMode() {
-      document.body.classList.toggle("dark");
-    }
+// Checkbox ke change event par dark class toggle hogi
+themeToggle.addEventListener("change", () => {
+  if (themeToggle.checked) {
+    document.body.classList.add("dark");
+  } else {
+    document.body.classList.remove("dark");
+  }
+});
 
-    //  FULL PAGE CURSOR GLOW
-    document.addEventListener("mousemove", (e) => {
-      document.body.style.setProperty("--x", e.clientX + "px");
-      document.body.style.setProperty("--y", e.clientY + "px");
-    });
+// ==========================================
+// 🔥 FULL PAGE CURSOR GLOW
+// ==========================================
+document.addEventListener("mousemove", (e) => {
+  document.body.style.setProperty("--x", e.clientX + "px");
+  document.body.style.setProperty("--y", e.clientY + "px");
+});
 
-    // NAVBAR EFFECT
-    const nav = document.querySelector(".nav");
-    nav.addEventListener("mousemove", (e) => {
-      const rect = nav.getBoundingClientRect();
-      nav.style.setProperty("--nx", (e.clientX - rect.left) + "px");
-      nav.style.setProperty("--ny", (e.clientY - rect.top) + "px");
-    });
+// ==========================================
+// ✨ NAVBAR LIGHT EFFECT
+// ==========================================
+const nav = document.querySelector(".nav");
+nav.addEventListener("mousemove", (e) => {
+  const rect = nav.getBoundingClientRect();
+  nav.style.setProperty("--nx", (e.clientX - rect.left) + "px");
+  nav.style.setProperty("--ny", (e.clientY - rect.top) + "px");
+});
 
-// TYPEWRITER WITH MULTIPLE SENTENCES
+// ==========================================
+// ⌨️ TYPEWRITER WITH MULTIPLE SENTENCES
+// ==========================================
 const sentences = [
   "Final year B.Tech student passionate about Data Science",
   "Full Stack Developer & AI Enthusiast",
@@ -39,15 +54,15 @@ function typeEffect() {
     element.textContent = currentSentence.substring(0, charIndex++);
     if (charIndex > currentSentence.length) {
       isDeleting = true;
-      setTimeout(typeEffect, 1500); 
+      setTimeout(typeEffect, 1500); // Sentence poora hone ke baad pause
       return;
     }
   } else {
-    
+    // Deleting logic
     element.textContent = currentSentence.substring(0, charIndex--);
     if (charIndex === 0) {
       isDeleting = false;
-    
+      // Agla sentence select karein
       sentenceIndex = (sentenceIndex + 1) % sentences.length;
     }
   }
@@ -56,8 +71,12 @@ function typeEffect() {
   setTimeout(typeEffect, isDeleting ? 40 : 80);
 }
 
+// Initial call to start the typewriter effect
 typeEffect();
 
+// ==========================================
+// 🖼️ CERTIFICATE POPUP MODAL LOGIC
+// ==========================================
 
 // OPEN MODAL
 function openModal(src) {
